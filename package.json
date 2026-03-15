@@ -1,0 +1,31 @@
+{
+  "name": "household_server",
+  "version": "1.0.0",
+  "description": "Server for project Household",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeoUral/household_server.git"
+  },
+  "author": "Leonid Kudryashov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LeoUral/household_server/issues"
+  },
+  "homepage": "https://github.com/LeoUral/household_server#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "env": "^0.0.2",
+    "express": "^5.2.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
