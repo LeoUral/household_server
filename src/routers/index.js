@@ -8,3 +8,5 @@ router.use("/users", usersRouter);
 // router.use("/product");
 
 module.exports = router;
+
+// todo: настроить работу всех роутеров, контроллеров
