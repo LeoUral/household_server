@@ -6,11 +6,16 @@ require("dotenv").config({
 
 const express = require("express");
 const cors = require("cors"); //отключает CORS
+const {
+  connectToDb,
+  closeConnection,
+} = require("./src/model/common/dbService");
 
 const app = express();
 const jsonParser = express.json({ limit: "10mb" });
 
 const router = require("./src/routers/index");
+const checkStatusCookie = require("./src/model/common/checkStatusCookie");
 
 console.log(`HELLOW, run process => `, process.env.NODE_ENV); // test
 
@@ -50,14 +55,14 @@ app.use(jsonParser);
 app.use(express.urlencoded());
 
 //* объект подключения к DB -> mongodb
-// app.use(async (req, _res, next) => {
-//   try {
-//     req.db = await connectToDb();
-//     next();
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+app.use(async (req, _res, next) => {
+  try {
+    req.db = await connectToDb();
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
 
 // *: проверка AUTH по URL: .../api/v1/auth/
 app.use("/api/v1/auth", async (req, res, next) => {
@@ -107,12 +112,12 @@ app.listen(process.env.PORT, async (req, res) => {
 
 process.on("SIGINT", async () => {
   console.log("Received SIGINT. Closing MongoDB connection...");
-  //   await closeConnection(); // Закрывает соединение с ДБ
+  await closeConnection(); // Закрывает соединение с ДБ
   process.exit(0);
 });
 
 process.on("SIGTERM", async () => {
   console.log("Received SIGTERM. Closing MongoDB connection...");
-  //   await closeConnection(); // Закрывает соединение с ДБ
+  await closeConnection(); // Закрывает соединение с ДБ
   process.exit(0);
 });

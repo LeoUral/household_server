@@ -1,5 +1,3 @@
-const { getAuth } = require("firebase-admin/auth");
-
 /**
  * Проверяем сессионные cookie
  * @param {Object} db
@@ -18,7 +16,7 @@ module.exports = async (cookiesAll, idCookie) => {
 
     //*: проверка cookie на подлинность
     // const resultVerif = await getAuth().verifySessionCookie(middleResult, true /** checkRevoked */)
-    const resultVerif = true; // проверка cookie - результат проверки
+    const resultVerif = true; //todo: проверка cookie - результат проверки
 
     return { result: resultVerif }; // объект пользователя
   } catch (err) {
